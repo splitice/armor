@@ -58,6 +58,7 @@ public final class ConfigConstants {
     public static final String ARMOR_AUTHENTICATION_SPNEGO_LOGIN_CONFIG_NAME = "armor.authentication.spnego.login_config_name";
     public static final String ARMOR_AUTHENTICATION_SPNEGO_STRIP_REALM = "armor.authentication.spnego.strip_realm";
     public static final String ARMOR_AUTHENTICATION_WAFFLE_STRIP_DOMAIN = "armor.authentication.waffle.strip_domain";
+    public static final String ARMOR_AUTHENTICATION_RESTFUL_LOGIN_URL = "searchguard.authentication.restful.login_url";
     public static final String ARMOR_CHECK_FOR_ROOT = "armor.check_for_root";
     public static final String ARMOR_CONFIG_INDEX_NAME = "armor.config_index_name";
     public static final String ARMOR_DLSFILTER = "armor.dlsfilter.names";
