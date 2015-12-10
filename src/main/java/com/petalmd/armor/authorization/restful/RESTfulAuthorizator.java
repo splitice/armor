@@ -119,7 +119,7 @@ public class RESTfulAuthorizator implements
 
         final char[] password = authCreds.getPassword();
 
-        final String userpassword = new String(password);
+        final String userpassword = new String(password == null ? new char[]{} : password);
 
         final String keystoneUrl = settings.get(ConfigConstants.ARMOR_AUTHENTICATION_RESTFUL_LOGIN_URL, null);
 
