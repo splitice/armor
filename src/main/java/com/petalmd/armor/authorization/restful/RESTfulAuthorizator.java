@@ -121,7 +121,7 @@ public class RESTfulAuthorizator implements
 
         final String userpassword = new String(password == null ? new char[]{} : password);
 
-        final String keystoneUrl = settings.get(ConfigConstants.ARMOR_AUTHENTICATION_RESTFUL_LOGIN_URL, null);
+        final String restfulURL = settings.get(ConfigConstants.ARMOR_AUTHENTICATION_RESTFUL_LOGIN_URL, null);
 
         int response_code;
 
@@ -135,7 +135,7 @@ public class RESTfulAuthorizator implements
                     new SecureRandom());
             SSLContext.setDefault(ctx);
 
-            URL url = new URL(keystoneUrl);
+            URL url = new URL(restfulURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             if(conn instanceof HttpsURLConnection) {
                 ((HttpsURLConnection)conn).setHostnameVerifier(new HostnameVerifier() {
@@ -150,7 +150,7 @@ public class RESTfulAuthorizator implements
             conn.setRequestProperty("Content-Type",
                     "application/json; charset=UTF-8");
 
-            String input = "{\"username\": \"" + quote(username) + "\", \"password\": \"" + quote(userpassword) + "\" }";
+            String input = "{\"username\": " + quote(username) + ", \"password\": " + quote(userpassword) + " }";
 
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
@@ -167,10 +167,8 @@ public class RESTfulAuthorizator implements
             }
         } catch (Exception e) {
 
-            log.error("exception during keystone authentication", e);
-            throw new AuthException("No user " + username
-                    + " or wrong password");
-
+            log.error("exception during RESTFUL authentication", e);
+            throw new AuthException("No user " + username + " or wrong password");
         }
 
         log.debug("Authenticated username {}", username);
